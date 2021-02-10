@@ -1,33 +1,37 @@
 ﻿using UnityEngine;
-using System.Collections;
+using UnityEngine.AI;
 
+[RequireComponent(typeof(NavMeshAgent))]
+[RequireComponent(typeof(EnemyHealth))]
 public class EnemyMovement : MonoBehaviour
 {
-    Transform player;
-    //PlayerHealth playerHealth;
-    //EnemyHealth enemyHealth;
-    UnityEngine.AI.NavMeshAgent nav;
+    private Transform player;
+    private PlayerHealth playerHealth;
+    private EnemyHealth enemyHealth;
+    private NavMeshAgent nav;
 
-
-    private void Awake ()
+    private void Awake()
     {
-        player = GameObject.FindGameObjectWithTag ("Player").transform;
+        enemyHealth = GetComponent<EnemyHealth>();
+        nav = GetComponent<NavMeshAgent>();
+    }
 
-        //playerHealth = player.GetComponent <PlayerHealth> ();
-        //enemyHealth = GetComponent <EnemyHealth> ();
-        nav = GetComponent <UnityEngine.AI.NavMeshAgent> ();
+    private void Start()
+    {
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        playerHealth = player.GetComponent<PlayerHealth>();
     }
 
 
-    void Update ()
+    void Update()
     {
-        //if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
-        //{
-            nav.SetDestination (player.position);
-        //}
-        //else
-        //{
-        //    nav.enabled = false;
-        //}
+        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        {
+            nav.SetDestination(player.position);
+        }
+        else
+        {
+            nav.enabled = false;
+        }
     }
 }
