@@ -74,3 +74,7 @@ InitTestScene*.unity
 # End of https://www.toptal.com/developers/gitignore/api/unity
 
 Builds
+Assets/_Complete-Game
+Assets/TutorialInfo
+Assets/_Complete-Game.meta
+Assets/TutorialInfo.meta
