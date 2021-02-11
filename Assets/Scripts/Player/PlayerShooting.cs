@@ -28,7 +28,7 @@ public class PlayerShooting : MonoBehaviour
         }
     }
 
-    void Shoot()
+    public void Shoot()
     {
         elapsedTime = 0f;
 

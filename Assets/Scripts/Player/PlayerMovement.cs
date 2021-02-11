@@ -31,9 +31,10 @@ public class PlayerMovement : MonoBehaviour
         Move(direction);
         Turning();
         Animating(direction);
+        rb.velocity = Vector3.zero;
     }
 
-    private void Move(Vector3 direction)
+    public void Move(Vector3 direction)
     {
         Vector3 movement = direction.normalized * speed * Time.fixedDeltaTime;
         rb.MovePosition(transform.position + movement);
@@ -54,7 +55,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    private void Animating(Vector3 direction)
+    public void Animating(Vector3 direction)
     {
         bool isWalking = direction != Vector3.zero;
         anim.SetBool("IsWalking", isWalking);
