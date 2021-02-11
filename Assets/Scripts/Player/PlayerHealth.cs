@@ -15,7 +15,7 @@ public class PlayerHealth : MonoBehaviour
     public Color flashColour = new Color(1f, 0f, 0f, 0.1f);
 
     [HideInInspector]
-    public int currentHealth;
+    public static int currentHealth;
     private Animator animator;
     private AudioSource playerAudio;
     private PlayerMovement playerMovement;
