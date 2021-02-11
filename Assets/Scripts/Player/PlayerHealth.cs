@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         damaged = true;
         currentHealth -= amount;
-        healthSlider.value = (currentHealth / startingHealth) * 100;
+        healthSlider.value = ((float)currentHealth / (float)startingHealth) * 100;
 
         playerAudio.Play();
 
@@ -75,7 +75,7 @@ public class PlayerHealth : MonoBehaviour
         //playerShooting.DisableEffects();
         playerMovement.enabled = false;
         //playerShooting.enabled = false;
-        
+
         isDead = true;
     }
 }
