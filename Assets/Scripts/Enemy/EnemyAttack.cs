@@ -8,32 +8,28 @@ public class EnemyAttack : MonoBehaviour
     public int attackDamage = 10;
 
     private Animator animator;
+    private EnemyHealth enemyHealth;
     private GameObject player;
     private PlayerHealth playerHealth;
-    //private EnemyHealth enemyHealth;
-    private bool playerInRange;
-    private float timer;
+    private bool playerInRange = false;
+    private float elapsedTime = 0f;
 
     void Awake()
     {
-        //enemyHealth = GetComponent<EnemyHealth>();
+        enemyHealth = GetComponent<EnemyHealth>();
         animator = GetComponent<Animator>();
     }
-    private void Start()
-    {
-        player = GameObject.FindGameObjectWithTag("Player");
-        playerHealth = player.GetComponent<PlayerHealth>();
-    }
+
     void Update()
     {
-        timer += Time.deltaTime;
+        elapsedTime += Time.deltaTime;
 
-        if (timer >= timeBetweenAttacks && playerInRange/* && enemyHealth.currentHealth > 0*/)
+        if (elapsedTime >= timeBetweenAttacks && playerInRange && enemyHealth.currentHealth > 0)
         {
             Attack();
         }
 
-        if (playerHealth.currentHealth <= 0)
+        if (PlayerHealth.currentHealth <= 0)
         {
             animator.SetTrigger("PlayerDead");
         }
@@ -41,9 +37,9 @@ public class EnemyAttack : MonoBehaviour
 
     void Attack()
     {
-        timer = 0f;
+        elapsedTime = 0f;
 
-        if (playerHealth.currentHealth > 0)
+        if (PlayerHealth.currentHealth > 0)
         {
             playerHealth.TakeDamage(attackDamage);
         }
@@ -53,6 +49,11 @@ public class EnemyAttack : MonoBehaviour
     {
         if (col.CompareTag("Player") && col.isTrigger == false)
         {
+            if (player == null)
+            {
+                player = col.gameObject;
+                playerHealth = player.GetComponent<PlayerHealth>();
+            }
             playerInRange = true;
         }
     }
@@ -64,6 +65,4 @@ public class EnemyAttack : MonoBehaviour
             playerInRange = false;
         }
     }
-
-
 }

@@ -5,8 +5,7 @@ using UnityEngine.AI;
 [RequireComponent(typeof(EnemyHealth))]
 public class EnemyMovement : MonoBehaviour
 {
-    private Transform player;
-    private PlayerHealth playerHealth;
+    private GameObject player;
     private EnemyHealth enemyHealth;
     private NavMeshAgent nav;
 
@@ -18,16 +17,15 @@ public class EnemyMovement : MonoBehaviour
 
     private void Start()
     {
-        player = GameObject.FindGameObjectWithTag("Player").transform;
-        playerHealth = player.GetComponent<PlayerHealth>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
 
     void Update()
     {
-        if (enemyHealth.currentHealth > 0 && playerHealth.currentHealth > 0)
+        if (enemyHealth.currentHealth > 0 && PlayerHealth.currentHealth > 0)
         {
-            nav.SetDestination(player.position);
+            nav.SetDestination(player.transform.position);
         }
         else
         {
