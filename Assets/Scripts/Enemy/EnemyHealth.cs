@@ -15,7 +15,7 @@ public class EnemyHealth : MonoBehaviour
     public int currentHealth;
     private Animator animator;
     private AudioSource enemyAudio;
-    private ParticleSystem hitParticles;
+    private ParticleSystem[] particles;
     private CapsuleCollider capsuleCollider;
     private bool isDead;
     private bool isSinking;
@@ -25,7 +25,7 @@ public class EnemyHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         enemyAudio = GetComponent<AudioSource>();
         capsuleCollider = GetComponent<CapsuleCollider>();
-        hitParticles = GetComponentInChildren<ParticleSystem>();
+        particles= GetComponentsInChildren<ParticleSystem>();
     }
 
     private void Start()
@@ -52,8 +52,8 @@ public class EnemyHealth : MonoBehaviour
         enemyAudio.Play();
         currentHealth -= amount;
 
-        hitParticles.transform.position = hitPoint;
-        hitParticles.Play();
+        particles[0].transform.position = hitPoint;
+        particles[0].Play();
 
         if (currentHealth <= 0)
         {
@@ -69,8 +69,10 @@ public class EnemyHealth : MonoBehaviour
 
         enemyAudio.clip = deathClip;
         enemyAudio.Play();
-        
-        ScoreManager.score += scoreValue;
+
+        particles[1].Play();
+
+        UIController.instance.AddScore(scoreValue);
         isDead = true;
     }
 
