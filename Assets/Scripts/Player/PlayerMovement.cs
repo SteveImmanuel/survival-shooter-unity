@@ -11,11 +11,15 @@ public class PlayerMovement : MonoBehaviour
     private Animator anim;
     private Rigidbody rb;
     private float camRayLength = 100f;
+    private float currentSpeed;
+    private bool isMultiplied = false;
+    private float timeLeft;
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
         rb = GetComponent<Rigidbody>();
+        currentSpeed = speed;
     }
 
     private void Update()
@@ -24,6 +28,15 @@ public class PlayerMovement : MonoBehaviour
         float v = Input.GetAxisRaw("Vertical");
 
         direction.Set(h, 0f, v);
+        if (isMultiplied && timeLeft >= 0)
+        {
+            IndicatorController.instance.SetPowerUpDurationText(timeLeft);
+            timeLeft -= Time.deltaTime;
+        }
+        else
+        {
+            ResetSpeed();
+        }
     }
 
     private void FixedUpdate()
@@ -34,9 +47,24 @@ public class PlayerMovement : MonoBehaviour
         rb.velocity = Vector3.zero;
     }
 
+    public void MultiplySpeed(float multiplier, float duration)
+    {
+        timeLeft = duration;
+        currentSpeed = speed * multiplier;
+        isMultiplied = true;
+        IndicatorController.instance.ActivatePowerUp();
+    }
+
+    private void ResetSpeed()
+    {
+        isMultiplied = false;
+        currentSpeed = speed;
+        IndicatorController.instance.DeactivatePowerUp();
+    }
+
     public void Move(Vector3 direction)
     {
-        Vector3 movement = direction.normalized * speed * Time.fixedDeltaTime;
+        Vector3 movement = direction.normalized * currentSpeed * Time.fixedDeltaTime;
         rb.MovePosition(transform.position + movement);
     }
 

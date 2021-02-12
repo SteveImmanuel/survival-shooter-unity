@@ -65,6 +65,13 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
+    public void AddHealth(int amount)
+    {
+        currentHealth += amount;
+        currentHealth = Mathf.Clamp(currentHealth, 0, startingHealth);
+        UIController.instance.SetHealthSlider(((float)currentHealth / (float)startingHealth) * 100);
+    }
+
 
     private void Death()
     {
