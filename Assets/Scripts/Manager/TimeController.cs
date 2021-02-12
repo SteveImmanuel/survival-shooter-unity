@@ -43,6 +43,7 @@ public class TimeController : MonoBehaviour
         playerMovement.enabled = false;
         CameraController.instance.ActivateKillCam();
         Time.timeScale = slowDownFactor;
+        AudioController.instance.SetPitch(slowDownFactor);
         Time.fixedDeltaTime = defaultFixedDeltaTime * slowDownFactor;
         StartCoroutine(ResetTimeScale());
     }
@@ -53,6 +54,7 @@ public class TimeController : MonoBehaviour
         while(Time.timeScale < 1)
         {
             Time.timeScale += Time.unscaledDeltaTime;
+            AudioController.instance.SetPitch(Time.timeScale);
             yield return new WaitForSeconds(Time.unscaledDeltaTime);
         }
         CameraController.instance.ActivateMainCam();
