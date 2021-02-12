@@ -1,31 +1,56 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 public class Gun : MonoBehaviour
 {
     public int damagePerShot = 20;
     public float timeBetweenBullets = 0.15f;
     public float range = 100f;
+    public GameObject bulletPrefab;
+    public int bulletPoolSize;
 
     private ParticleSystem gunParticles;
-    private LineRenderer bulletTrail;
     private Light gunLight;
     private float elapsedTime;
     private Ray shootRay;
     private RaycastHit shootHit;
     private AudioSource gunAudio;
     private float effectsDisplayTime = 0.2f;
+    private Queue<Tuple<GameObject, Bullet>> bulletPool;
+
 
     void Awake()
     {
         gunParticles = GetComponentInChildren<ParticleSystem>();
-        bulletTrail = GetComponentInChildren<LineRenderer>();
         gunLight = GetComponentInChildren<Light>();
         gunAudio = GetComponent<AudioSource>();
     }
 
+    private void Start()
+    {
+        bulletPool = new Queue<Tuple<GameObject, Bullet>>();
+
+        for (int i = 0; i < bulletPoolSize; i++)
+        {
+            GameObject bullet = Instantiate(bulletPrefab);
+            Bullet bulletScript = bullet.GetComponent<Bullet>();
+            bullet.SetActive(false);
+            bulletPool.Enqueue(new Tuple<GameObject, Bullet>(bullet, bulletScript));
+        }
+    }
+
+    private void SpawnBullet(Vector3 position, Vector3 destination)
+    {
+        Tuple<GameObject, Bullet> tuple = bulletPool.Dequeue();
+        tuple.Item1.transform.position = position;
+        tuple.Item2.SetDestination(destination);
+        tuple.Item1.SetActive(true);
+        bulletPool.Enqueue(tuple);
+    }
+
     public void DisableEffects()
     {
-        bulletTrail.enabled = false;
         gunLight.enabled = false;
     }
 
@@ -39,14 +64,12 @@ public class Gun : MonoBehaviour
 
         if (shootHit == Vector3.positiveInfinity)
         {
-            bulletTrail.SetPosition(1, shootOrigin + direction * range);
+            SpawnBullet(shootOrigin, shootOrigin + direction * range);
         }
         else
         {
-            bulletTrail.SetPosition(1, shootHit);
+            SpawnBullet(shootOrigin, shootHit);
         }
-        bulletTrail.SetPosition(0, shootOrigin);
-        bulletTrail.enabled = true;
 
         Invoke(nameof(DisableEffects), effectsDisplayTime);
     }
