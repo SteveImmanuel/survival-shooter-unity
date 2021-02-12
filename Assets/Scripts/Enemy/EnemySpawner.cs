@@ -54,7 +54,6 @@ public class EnemySpawner : MonoBehaviour
                 break;
             }
         }
-        Debug.Log(enemyTypes[enemyIndex].gameObject.name);
         int spawnPointIndex = Random.Range(0, spawnPoints.Length);
         Instantiate(enemyTypes[enemyIndex].gameObject, spawnPoints[spawnPointIndex].position, spawnPoints[spawnPointIndex].rotation);
     }
