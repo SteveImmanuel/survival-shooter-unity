@@ -60,4 +60,10 @@ public class PlayerMovement : MonoBehaviour
         bool isWalking = direction != Vector3.zero;
         anim.SetBool("IsWalking", isWalking);
     }
+
+    public void StopMoving()
+    {
+        rb.velocity = Vector3.zero;
+        rb.angularVelocity = Vector3.zero;
+    }
 }

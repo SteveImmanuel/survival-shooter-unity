@@ -19,7 +19,7 @@ public class PlayerHealth : MonoBehaviour
     private Animator animator;
     private AudioSource playerAudio;
     private PlayerMovement playerMovement;
-    //private PlayerShooting playerShooting;
+    private PlayerShooting playerShooting;
     private bool isDead;
     private bool damaged;
 
@@ -28,7 +28,7 @@ public class PlayerHealth : MonoBehaviour
         animator = GetComponent<Animator>();
         playerAudio = GetComponent<AudioSource>();
         playerMovement = GetComponent<PlayerMovement>();
-        //playerShooting = GetComponentInChildren<PlayerShooting>();
+        playerShooting = GetComponentInChildren<PlayerShooting>();
     }
 
     private void Start()
@@ -55,7 +55,7 @@ public class PlayerHealth : MonoBehaviour
     {
         damaged = true;
         currentHealth -= amount;
-        healthSlider.value = ((float)currentHealth / (float)startingHealth) * 100;
+        UIController.instance.SetHealthSlider(((float)currentHealth / (float)startingHealth) * 100);
 
         playerAudio.Play();
 
@@ -72,9 +72,9 @@ public class PlayerHealth : MonoBehaviour
         playerAudio.Play();
         animator.SetTrigger("Dead");
 
-        //playerShooting.DisableEffects();
+        playerMovement.StopMoving();
         playerMovement.enabled = false;
-        //playerShooting.enabled = false;
+        playerShooting.enabled = false;
 
         isDead = true;
     }
