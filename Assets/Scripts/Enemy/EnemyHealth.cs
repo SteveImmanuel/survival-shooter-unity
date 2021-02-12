@@ -73,6 +73,7 @@ public class EnemyHealth : MonoBehaviour
         particles[1].Play();
 
         UIController.instance.AddScore(scoreValue);
+        TimeController.instance.AddKill();
         isDead = true;
     }
 
