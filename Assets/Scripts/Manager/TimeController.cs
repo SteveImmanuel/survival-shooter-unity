@@ -66,7 +66,8 @@ public class TimeController : MonoBehaviour
     public void AddKill()
     {
         enemyKilled += 1;
-        if (enemyKilled % 5 == 0)
+        float chance = Random.Range(0f, 100f);
+        if (enemyKilled % 5 == 0 && chance <= 30)
         {
             SlowDown();
         }

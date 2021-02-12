@@ -12,13 +12,18 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     public EnemyType[] enemyTypes;
     public float firstDelay = 2f;
-    public float spawnTime = 3f;
+    public float maxTimeBetween = 3f;
+    public float minTimeBetween = 1f;
+    public float timeUntilMaxDifficult = 50f;
     public Transform[] spawnPoints;
 
     private float[] range;
+    private float elapsedTime = 0f;
+    private float spawnTime;
 
     private void Start()
     {
+        spawnTime = maxTimeBetween;
         range = new float[enemyTypes.Length];
         for (int i = 0; i < range.Length; i++)
         {
@@ -31,8 +36,21 @@ public class EnemySpawner : MonoBehaviour
                 range[i] = enemyTypes[i].chanceToSpawn + range[i - 1];
             }
         }
+    }
 
-        InvokeRepeating(nameof(Spawn), firstDelay, spawnTime);
+    private void Update()
+    {
+        elapsedTime += Time.deltaTime;
+
+        if (spawnTime <= 0)
+        {
+            Spawn();
+            spawnTime = Mathf.Lerp(maxTimeBetween, minTimeBetween, elapsedTime / timeUntilMaxDifficult);
+        }
+        else
+        {
+            spawnTime -= Time.deltaTime;
+        }
     }
 
     private void Spawn()
