@@ -3,8 +3,9 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    public float restartDelay = 5f;            
-
+    public float restartDelay = 5f;
+    public GameObject mainVcam;
+    public GameObject deathCam;
     private bool isGameOver = false;
 
     void Update()
@@ -12,13 +13,6 @@ public class GameManager : MonoBehaviour
         if (PlayerHealth.currentHealth <= 0 && !isGameOver)
         {
             isGameOver = true;
-            UIController.instance.GameOver();
-            Invoke(nameof(RestartGame), restartDelay);
         }
-    }
-
-    private void RestartGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

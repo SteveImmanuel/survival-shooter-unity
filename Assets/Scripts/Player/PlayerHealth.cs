@@ -66,7 +66,7 @@ public class PlayerHealth : MonoBehaviour
     }
 
 
-    void Death()
+    private void Death()
     {
         playerAudio.clip = deathClip;
         playerAudio.Play();
@@ -77,5 +77,10 @@ public class PlayerHealth : MonoBehaviour
         playerShooting.enabled = false;
 
         isDead = true;
+    }
+
+    public void OnAnimationEnd()
+    {
+        UIController.instance.GameOver();
     }
 }

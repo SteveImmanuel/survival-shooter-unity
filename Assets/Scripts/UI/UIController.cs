@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Animator))]
 public class UIController : MonoBehaviour
@@ -40,5 +41,10 @@ public class UIController : MonoBehaviour
     public void GameOver()
     {
         animator.SetTrigger("GameOver");
+    }
+
+    public void OnAnimationEnd()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }
