@@ -11,10 +11,32 @@ From the base tutorial I make some improvements which are:
 - Implement better enemy detection system that checks only for enemies and can show the direction of the most nearby enemy
 - Implement better spawning system so that each enemy type has certain rarity to spawn and the spawn rate increases as the time goes by
 - Update some particles systems
-- Implement bullet time effect that slows down time, change camera angle, and change audio pitch accordingly. This effect is triggered with 30% chance for every 5th enemy you killed
+- Implement bullet time effect that slows down time, change camera angle, and change audio pitch accordingly. This effect can be triggered manually but is also automatically triggered with 30% chance for every 5th enemy you killed
 
-## Screenshot
-![screensshot](screenshot.png)
+## Asset
+I use custom skybox that I got from Unity Asset Store (<a href=https://assetstore.unity.com/packages/2d/textures-materials/sky/spaceskies-free-80503>Spaceskies Free</a>).
+
+## Showcases
+### Postprocessing
+| Vanilla Version              |  My Version                   |
+:-----------------------------:|:------------------------------:
+![](Showcases/glow_plain.png)  |  ![](Showcases/glow_mine.png)
+
+### Bullet Trail
+| Vanilla Version              |  My Version                   |
+:-----------------------------:|:------------------------------:
+![](Showcases/bullet_plain.gif)  |  ![](Showcases/bullet_mine.gif)
+
+### Warning System
+| Vanilla Version              |  My Version                   |
+:-----------------------------:|:------------------------------:
+![](Showcases/warning_plain.gif)  |  ![](Showcases/warning_mine.gif)
+
+### Bullet Time Effect
+![](Showcases/bullettime.gif)
+
+### Death Cam
+![](Showcases/deathcam.gif)
 
 ## Controls
 - Move Up: W
@@ -22,6 +44,7 @@ From the base tutorial I make some improvements which are:
 - Move Left: A
 - Move Right: D
 - Shoot: Left Click
+- Trigger Bullet Time: Left Ctrl
 
 ## Notes for Assistant / Examiner
 When making this game, I <b>don't</b> fully follow along the tutorial and here's why:
@@ -31,4 +54,4 @@ When making this game, I <b>don't</b> fully follow along the tutorial and here's
 
 However, if the purpose of the tutorial is just to introduce us to command and factory pattern, then nevermind. But, perhaps you can use another tutorial (not the Survival Shooter) to better exemplify the concepts.
 
-All build results is located in the <a href=https://github.com/SteveImmanuel/pong-unity/releases>release</a> page.
+All build results is located in the <a href=https://github.com/SteveImmanuel/survival-shooter-unity/releases>release</a> page.
