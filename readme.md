@@ -50,7 +50,7 @@ I use custom skybox that I got from Unity Asset Store (<a href=https://assetstor
 When making this game, I <b>don't</b> fully follow along the tutorial and here's why:
 - I <b>understand</b> the point of using the factory pattern however in the tutorial, the implementation is somewhat pointless. If anything, it just makes it more difficult to implement without any clear advantages. So, I implement my own spawning system using serializable `struct`. See [EnemySpawner.cs](Assets/Scripts/Enemy/EnemySpawner.cs).
 
-- The use of command pattern here also doesn't make sense because the game doesn't really need undo/replay mechanics. The tutorial also doesn't disable the original player movement script that handles the input so everything the user inputs will be processed twice by `InputHandler` and `PlayerMovement` that creates weird behaviour and makes the game laggy. With those reasons, I decided to disable the `InputHandler` but there script is still there if you want to check it.
+- The use of command pattern here also doesn't make sense because the game doesn't really need undo/replay mechanics. The tutorial also doesn't disable the original player movement script that handles the input so everything the user inputs will be processed twice by `InputHandler` and `PlayerMovement` that creates weird behaviour and makes the game laggy. With those reasons, I decided to disable the `InputHandler` but the scripts are still there if you want to check it.
 
 However, if the purpose of the tutorial is just to introduce us to command and factory pattern, then nevermind. But, perhaps you can use another tutorial (not the Survival Shooter) to better exemplify the concepts.
 
