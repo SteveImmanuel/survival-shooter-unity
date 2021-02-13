@@ -3,19 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(Animator))]
+[RequireComponent(typeof(AudioSource))]
 public class BasePowerUp : MonoBehaviour
 {
     public float duration = 5f;
 
     private Animator animator;
+    private AudioSource audioSource;
+    private GameObject mesh;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
+        mesh = transform.GetChild(0).gameObject;
     }
 
     public void Spawn()
     {
+        mesh.SetActive(true);
         animator.ResetTrigger("Despawn");
         StopCoroutine(DisableSelf());
         StartCoroutine(DisableSelf());
@@ -34,10 +40,18 @@ public class BasePowerUp : MonoBehaviour
 
         if (other.CompareTag("Player"))
         {
-            StopCoroutine(DisableSelf());
-            Execute(other.gameObject);
-            gameObject.SetActive(false);
+            StopAllCoroutines();
+            StartCoroutine(TriggerPowerUp(other.gameObject));
         }   
+    }
+
+    IEnumerator TriggerPowerUp(GameObject player)
+    {
+        audioSource.Play();
+        mesh.SetActive(false);
+        Execute(player);
+        yield return new WaitForSeconds(0.4f);
+        gameObject.SetActive(false);
     }
 
     protected virtual void Execute(GameObject player)

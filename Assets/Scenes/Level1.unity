@@ -1073,7 +1073,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 817158168}
-  m_LocalRotation: {x: -0.045667034, y: -0.029077, z: -0.0013298116, w: 0.9985326}
+  m_LocalRotation: {x: -0.045667034, y: -0.029077005, z: -0.0013298118, w: 0.9985326}
   m_LocalPosition: {x: 0.9381939, y: 0.51, z: -1.5589074}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1243,7 +1243,9 @@ MonoBehaviour:
       type: 3}
     chanceToSpawn: 0.2
   firstDelay: 5
-  spawnTime: 3
+  maxTimeBetween: 3
+  minTimeBetween: 1
+  timeUntilMaxDifficult: 50
   spawnPoints:
   - {fileID: 1478624483}
   - {fileID: 1640652681}
@@ -2084,7 +2086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 409160, guid: ad67cddd729fb4342be2063a3f5ad7cc, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 409160, guid: ad67cddd729fb4342be2063a3f5ad7cc, type: 3}
       propertyPath: m_LocalPosition.x
@@ -3274,7 +3276,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1862630401}
-  m_LocalRotation: {x: 0.114475444, y: 0.8777662, z: -0.26082572, w: 0.38521665}
+  m_LocalRotation: {x: 0.114475444, y: 0.87776613, z: -0.26082572, w: 0.38521662}
   m_LocalPosition: {x: -1.95, y: 2, z: 2.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -4041,7 +4043,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2096902086
 GameObject:
